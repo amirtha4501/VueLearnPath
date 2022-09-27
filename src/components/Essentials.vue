@@ -77,6 +77,22 @@ console.log("proxy 3", reactive(proxy) === proxy) // true
 proxy.nested = raw
 console.log("proxy 4", proxy.nested === raw) // false
 
+const object = { foo: ref(1) }
+const { foo } = object
+
+// Ref Unwrapping in Arrays and Collections
+const books = reactive([ref('Vue 3 Guide 1'), ref('Vue 3 Guide 2', ref('Vue 3 Guide 3'))]) // need .value here
+console.log(books[0].value)
+const map = reactive(new Map([['count', ref(0)]])) // need .value here
+console.log(map.get('count').value)
+
+// // Reactivity Transform
+// let transCount = $ref(0)
+
+// function transIncrement() {
+//   transCount++ // no need for .value
+// }
+
 </script>
 
 <template>
@@ -207,6 +223,36 @@ console.log("proxy 4", proxy.nested === raw) // false
     1. It only works for object types. It cannot hold primitive types such as string, number or boolean.
     2. When we assign or destructure a reactive object's property into local variables, or when we pass that property into a function, 
     we will lose the reactivity connection
+  </WelcomeItem>
+
+  <!-- Reactivity Fundamentals - Reactive Variables with ref() -->
+  <WelcomeItem>
+    <template #icon><DocumentationIcon /></template>
+    <template #heading>Reactivity Fundamentals - Reactive Variables with ref() <span style="color: red;">*</span></template>
+
+    <h3><strong>Ref Unwrapping in Templates</strong></h3>
+    Unwrapping only applies if the ref is a top-level property on the template render context.
+    We can fix that by making foo a top-level property:
+    {{ object.foo }}
+    {{ foo + 1 }}
+    <h3><strong>Ref Unwrapping in Arrays and Collections</strong></h3>
+    <code>
+      <pre>
+        const books = reactive([ref('Vue 3 Guide')]) // need .value here
+        console.log(books[0].value)
+
+        const map = reactive(new Map([['count', ref(0)]])) // need .value here
+        console.log(map.get('count').value)
+      </pre>
+    </code>
+  </WelcomeItem>
+
+  <!-- Reactivity Fundamentals - Reactivity Transform -->
+  <WelcomeItem>
+    <template #icon><DocumentationIcon /></template>
+    <template #heading>Reactivity Fundamentals - Reactivity Transform <span style="color: red;">*</span></template>
+
+    <!-- <button @click="transIncrement">{{ transCount }}</button> -->
   </WelcomeItem>
 
 </template>
