@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import food from '../src/food.json'
+
 </script>
 
 <template>
@@ -18,14 +19,62 @@ import HelloWorld from './components/HelloWorld.vue'
         <span>Past Orders</span>
       </RouterLink>
     </nav>
-    <!-- <a @click="toggleSidebar" class="top-bar-cart-link">
+    <div @click="toggleSidebar" class="top-bar-cart-link">
       <i class="icofont-cart-alt icofont-1x"></i>
       <span>Cart ({{ totalQuantity }})</span>
-    </a> -->
+    </div>
   </header>
 
-  <RouterView />
+  <RouterView :inventory="inventory" />
+
+  <Sidebar 
+    v-if="showSidebar"
+    :toggle="toggleSidebar"
+    :cart="cart"
+    :inventory="inventory"
+    :removeItem="removeItem"
+  />
 </template>
+
+<script>
+  import Sidebar from './components/Sidebar.vue'
+
+  export default {
+    components: {
+      Sidebar
+    },
+    data() {
+      return {
+        showSidebar: false,
+        // toggleSidebar: true,
+        cart: {},
+        inventory: food,
+        // removeItem: true
+      }
+    },
+    computed: {
+      totalQuantity() {
+        return Object.values(this.cart).reduce((acc, curr) => {
+          return acc + curr
+        }, 0)
+      }
+    },
+    methods: {
+      addToCart(name, index) {
+        if (!this.cart[name]) this.cart[name] = 0
+        this.cart[name] += this.inventory[index].quantity
+        this.inventory[index].quantity = 0
+        console.log(this.cart)
+      },
+      toggleSidebar() {
+        this.showSidebar = !this.showSidebar
+      },
+      removeItem(name) {
+        delete this.cart[name]
+      }
+    }
+  }
+</script>
 
 <!-- <style scoped>
 header {
