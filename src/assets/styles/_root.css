@@ -1,5 +1,5 @@
 :root {
-    --bodyBackground: #FCF5D8;
+    --bodyBackground: white;
     --bodyTextColor: #390D04;
     --topNavBackground: #79A206;
     --topNavColor: #FFF8EA;
@@ -7,7 +7,7 @@
     --splashTextColor: #FF6866;
     --cartBackground: #001;
     --cartTitleBackground: #335;
-    --footerBackground: #5B2A3F;
+    --footerBackground: #e3e53c;
     --spashBackground: #390D04;
     --splashTextShadow: #200;
     --cardTextColor: #280D14;
