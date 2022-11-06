@@ -1,9 +1,10 @@
 :root {
     --bodyBackground: white;
-    --bodyTextColor: #390D04;
+    --bodyTextColor: black;
     --topNavBackground: #79A206;
     --topNavColor: #FFF8EA;
     --topBarLinkHoverBackground: #9ABA00;
+    /* --splashTextColor: honeydew; */
     --splashTextColor: #FF6866;
     --cartBackground: #001;
     --cartTitleBackground: #335;

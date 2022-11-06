@@ -1,7 +1,7 @@
 <template>
   
   <main class="wrapper">
-    <h1>Products</h1>
+    <h1 style="margin-bottom: 15px;">Products</h1>
 
     <div class="card-container">
       <ProductCard
